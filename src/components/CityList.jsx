@@ -1,6 +1,10 @@
+// Styles
 import styles from "./CityList.module.css";
+
+// Hooks
 import { useCities } from "../hooks/useCities";
 
+// Components
 import CityItem from "./CityItem";
 import Spinner from "./Spinner";
 import Message from "./Message";
