@@ -1,25 +1,22 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-// ===> Pages ────────────────────────────────────
+// Pages
 import Homepage from "./pages/Homepage";
 import Pricing from "./pages/Pricing";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import AppLayout from "./pages/AppLayout";
-// ───────────────────────────────────────────────
 
-// Page Not Found ↓↓↓
+// Fallback Page
 import PageNotFound from "./pages/PageNotFound";
 
-// ===> Components ───────────────────────────
-// ===> ProtectedRoute ───────────────────────
-import { ProtectedRoute } from "./components/ProtectedRoute";
-// ───────────────────────────────────────────
+// Components
 import City from "./components/City";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
-//  ──────────────────────────────────────
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
+// Context
 import { CitiesProvider } from "./contexts/CitiesContext";
 
 function App() {
