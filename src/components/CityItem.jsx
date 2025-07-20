@@ -12,7 +12,7 @@ const formatDate = (date) =>
 function CityItem({ city }) {
   const { cityName, emoji, date, id, position } = city;
 
-  const { deleteCity } = useCities();
+  const { deleteCity, currentCity } = useCities();
 
   const navigate = useNavigate();
 
@@ -27,7 +27,9 @@ function CityItem({ city }) {
     <li>
       <NavLink
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
-        className={styles.cityItem}
+        className={`${styles.cityItem} ${
+          id === currentCity.id ? styles["cityItem--active"] : ""
+        }`}
       >
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>

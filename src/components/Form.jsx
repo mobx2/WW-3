@@ -10,6 +10,8 @@ import { useUrlLocation } from "../hooks/useUrlLocation";
 import Spinner from "./Spinner";
 import { useCities } from "../hooks/useCities";
 import { useNavigate, useParams } from "react-router-dom";
+import Button from "./Button";
+import ButtonBack from "./ButtonBack";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -110,8 +112,10 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <button onClick={handleAdd}>Add</button>
-        <button>&larr; Back</button>
+        <Button type="primary" onClick={handleAdd}>
+          Add
+        </Button>
+        <ButtonBack>&larr; Back</ButtonBack>
       </div>
     </form>
   );

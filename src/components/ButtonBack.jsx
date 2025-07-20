@@ -5,7 +5,7 @@ function ButtonBack({ children }) {
   const navigate = useNavigate();
 
   function goBack() {
-    navigate(-1);
+    navigate("/app/cities");
   }
 
   return (
