@@ -1,3 +1,16 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "9c3b",
+      "cityName": "El Abiodh Sidi Cheikh",
+      "country": "Algeria",
+      "emoji": "🇩🇿",
+      "date": "2025-07-20T17:28:49.059Z",
+      "notes": "",
+      "position": {
+        "lat": "32.676372772089834",
+        "lng": "1.1645507812500002"
+      }
+    }
+  ]
 }

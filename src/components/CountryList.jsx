@@ -3,6 +3,7 @@ import { useCities } from "../hooks/useCities";
 import styles from "./CountryList.module.css";
 
 import CountryItem from "./CountryItem";
+import Message from "./Message";
 
 function CountryList() {
   const { cities, isLoading } = useCities();
@@ -15,6 +16,11 @@ function CountryList() {
   console.log(countries);
 
   if (isLoading) return <Spinner />;
+
+  if (cities.length < 1)
+    return (
+      <Message message="Add your first city by clicking on a city on the map" />
+    );
 
   return (
     <ul className={styles.countryList}>
