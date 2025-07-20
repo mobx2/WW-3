@@ -5,7 +5,7 @@ const CitiesContext = createContext();
 const initialState = {
   cities: [],
   isLoading: false,
-  currCity: {},
+  currentCity: {},
   error: "",
 };
 
@@ -29,7 +29,7 @@ function reducer(state, action) {
     case "city/loaded":
       return {
         ...state,
-        currCity: action.payload,
+        currentCity: action.payload,
         isLoading: false,
       };
 
@@ -45,12 +45,15 @@ function reducer(state, action) {
 }
 
 function CitiesProvider({ children }) {
-  const [{ cities, isLoading }, dispatch] = useReducer(reducer, initialState);
+  const [{ cities, isLoading, error, currentCity }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useEffect(() => {
     async function getCities() {
-      dispatch({ type: "loading" });
       try {
+        dispatch({ type: "loading" });
         const res = await fetch(`${BASE_URL}/cities`);
 
         if (!res.ok) throw new Error("Something went Wrong");
@@ -67,7 +70,9 @@ function CitiesProvider({ children }) {
 
   async function getCity(id) {
     try {
-      const res = await fetch(`${BASE_URL}/${id}`);
+      dispatch({ type: "loading" });
+
+      const res = await fetch(`${BASE_URL}/cities/${id}`);
 
       const data = await res.json();
 
@@ -80,7 +85,7 @@ function CitiesProvider({ children }) {
   }
 
   return (
-    <CitiesContext.Provider value={{ cities, isLoading, getCity }}>
+    <CitiesContext.Provider value={{ cities, isLoading, getCity, currentCity }}>
       {children}
     </CitiesContext.Provider>
   );

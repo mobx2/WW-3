@@ -1,11 +1,14 @@
 import styles from "./CityList.module.css";
 import { useCities } from "../hooks/useCities";
+
 import CityItem from "./CityItem";
+import Spinner from "./Spinner";
 
 function CityList() {
-  const { cities } = useCities();
+  const { cities, isLoading } = useCities();
 
-  console.log(cities);
+  if (isLoading) return <Spinner />;
+
   return (
     <ul className={styles.cityList}>
       {cities.map((city, index) => (

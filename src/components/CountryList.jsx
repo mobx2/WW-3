@@ -5,7 +5,7 @@ import styles from "./CountryList.module.css";
 import CountryItem from "./CountryItem";
 
 function CountryList() {
-  const { cities } = useCities();
+  const { cities, isLoading } = useCities();
 
   const countries = cities.reduce((arr, city) => {
     if (arr.map((el) => el.country).includes(city.country)) return arr;
@@ -13,6 +13,8 @@ function CountryList() {
   }, []);
 
   console.log(countries);
+
+  if (isLoading) return <Spinner />;
 
   return (
     <ul className={styles.countryList}>
