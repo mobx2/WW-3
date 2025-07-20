@@ -1,5 +1,10 @@
+import { useCities } from "../hooks/useCities";
+
 function CityList() {
-  return <div>Cities</div>;
+  const { cities } = useCities();
+
+  console.log(cities);
+  return <div></div>;
 }
 
 export default CityList;

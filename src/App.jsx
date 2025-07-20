@@ -12,13 +12,15 @@ import AppLayout from "./pages/AppLayout";
 import PageNotFound from "./pages/PageNotFound";
 
 // ===> Components ───────────────────────────
-// ===> ProtectedRoute ───────────────────────────
+// ===> ProtectedRoute ───────────────────────
 import { ProtectedRoute } from "./components/ProtectedRoute";
-// ───────────────────────────────────────────────
+// ───────────────────────────────────────────
 
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
-// ===> ──────────────────────────────────────
+//  ──────────────────────────────────────
+
+import { CitiesProvider } from "./contexts/CitiesContext";
 
 function App() {
   return (
@@ -37,9 +39,11 @@ function App() {
         <Route
           path="app"
           element={
-            <ProtectedRoute>
-              <AppLayout />
-            </ProtectedRoute>
+            <CitiesProvider>
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            </CitiesProvider>
           }
         >
           <Route path="cities" element={<CityList />} />

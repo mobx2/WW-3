@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import CitiesContext from "../contexts/CitiesContext";
+import { CitiesContext } from "../contexts/CitiesContext";
 
 function useCities() {
   const context = useContext(CitiesContext);
 
   if (context === undefined)
-    throw new Error("useAuth was used outside AuthProvider");
+    throw new Error("useCities was used outside AuthProvider");
 
   return context;
 }
