@@ -1,9 +1,18 @@
+// React Router
 import { useParams, useSearchParams } from "react-router-dom";
-import styles from "./City.module.css";
-import { useCities } from "../hooks/useCities";
+
+// React
 import { useEffect } from "react";
+
+// Custom Hooks
+import { useCities } from "../hooks/useCities";
+
+// Components
 import Spinner from "./Spinner";
 import ButtonBack from "./ButtonBack";
+
+// Styles
+import styles from "./City.module.css";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -14,16 +23,14 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
+  // Get city ID from URL
   const { id } = useParams();
 
+  // Destructure context values from custom hook
   const { currentCity, getCity, isLoading } = useCities();
 
+  // Destructure city data
   const { cityName, emoji, date, notes } = currentCity;
-
-  const [searchParams] = useSearchParams();
-
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
 
   useEffect(() => {
     async function fetchCity() {

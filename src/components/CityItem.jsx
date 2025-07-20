@@ -1,5 +1,10 @@
+// React Router
 import { NavLink, useNavigate } from "react-router-dom";
+
+// Styles
 import styles from "./CityItem.module.css";
+
+// Custom Hooks
 import { useCities } from "../hooks/useCities";
 
 const formatDate = (date) =>
@@ -10,17 +15,20 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
+  // Destructure city properties for easy access
   const { cityName, emoji, date, id, position } = city;
 
+  // Get delete function and currentCity from custom Cities context
   const { deleteCity, currentCity } = useCities();
 
+  // Hook for programmatic navigation
   const navigate = useNavigate();
 
+  // Handle city deletion and navigate back to cities list
   async function handleDelete(e) {
-    e.preventDefault();
-
-    await deleteCity(id);
-    navigate("/app/cities");
+    e.preventDefault(); // Prevent default link or button behavior
+    await deleteCity(id); // Delete the selected city from state and API
+    navigate("/app/cities"); // Redirect to the cities list page
   }
 
   return (
