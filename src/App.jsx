@@ -5,15 +5,20 @@ import Homepage from "./pages/Homepage";
 import Pricing from "./pages/Pricing";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
+import AppLayout from "./pages/AppLayout";
 // ───────────────────────────────────────────────
 
-// ===> ProtectedRoute ───────────────────────────
-
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import AppLayout from "./pages/AppLayout";
+// Page Not Found ↓↓↓
 import PageNotFound from "./pages/PageNotFound";
 
+// ===> Components ───────────────────────────
+// ===> ProtectedRoute ───────────────────────────
+import { ProtectedRoute } from "./components/ProtectedRoute";
 // ───────────────────────────────────────────────
+
+import CityList from "./components/CityList";
+import CountryList from "./components/CountryList";
+// ===> ──────────────────────────────────────
 
 function App() {
   return (
@@ -36,7 +41,10 @@ function App() {
               <AppLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="cities" element={<CityList />} />
+          <Route path="countries" element={<CountryList />} />
+        </Route>
         {/* AppLayout Routes */}
 
         <Route path="*" element={<PageNotFound />} />
