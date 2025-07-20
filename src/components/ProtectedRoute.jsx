@@ -1,5 +1,10 @@
+// Routing
 import { useNavigate } from "react-router-dom";
+
+// Custom hooks
 import { useAuth } from "../hooks/useAuth";
+
+// React core
 import { useEffect } from "react";
 
 function ProtectedRoute({ children }) {

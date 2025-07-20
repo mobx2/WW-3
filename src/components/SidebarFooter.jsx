@@ -1,3 +1,4 @@
+// Styles
 import styles from "./Sidebar.module.css";
 
 function SidebarFooter() {

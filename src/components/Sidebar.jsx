@@ -1,7 +1,10 @@
+// Routing
 import { Outlet } from "react-router-dom";
 
+// Styles
 import styles from "./Sidebar.module.css";
 
+// UI Components
 import AppNav from "./AppNav";
 import SidebarFooter from "./SidebarFooter";
 
