@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 // ===> Pages ────────────────────────────────────
 import Homepage from "./pages/Homepage";
@@ -15,7 +15,7 @@ import PageNotFound from "./pages/PageNotFound";
 // ===> ProtectedRoute ───────────────────────
 import { ProtectedRoute } from "./components/ProtectedRoute";
 // ───────────────────────────────────────────
-
+import City from "./components/City";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 //  ──────────────────────────────────────
@@ -46,7 +46,11 @@ function App() {
             </CitiesProvider>
           }
         >
+          <Route index element={<Navigate replace to="cities" />} />
           <Route path="cities" element={<CityList />} />
+
+          <Route path="cities/:id" element={<City />} />
+
           <Route path="countries" element={<CountryList />} />
         </Route>
         {/* AppLayout Routes */}

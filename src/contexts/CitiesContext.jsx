@@ -5,6 +5,7 @@ const CitiesContext = createContext();
 const initialState = {
   cities: [],
   isLoading: false,
+  currCity: {},
   error: "",
 };
 
@@ -22,6 +23,13 @@ function reducer(state, action) {
       return {
         ...state,
         cities: action.payload,
+        isLoading: false,
+      };
+
+    case "city/loaded":
+      return {
+        ...state,
+        currCity: action.payload,
         isLoading: false,
       };
 
@@ -57,8 +65,22 @@ function CitiesProvider({ children }) {
     getCities();
   }, []);
 
+  async function getCity(id) {
+    try {
+      const res = await fetch(`${BASE_URL}/${id}`);
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error("Something went wrong");
+
+      dispatch({ type: "city/loaded", payload: data });
+    } catch (err) {
+      dispatch({ type: "reject", payload: err.message });
+    }
+  }
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading }}>
+    <CitiesContext.Provider value={{ cities, isLoading, getCity }}>
       {children}
     </CitiesContext.Provider>
   );
