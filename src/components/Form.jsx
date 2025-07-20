@@ -2,9 +2,14 @@
 
 import { useEffect, useState } from "react";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import styles from "./Form.module.css";
 import { useUrlLocation } from "../hooks/useUrlLocation";
 import Spinner from "./Spinner";
+import { useCities } from "../hooks/useCities";
+import { useNavigate } from "react-router-dom";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -26,6 +31,10 @@ function Form() {
 
   const { lat, lng } = useUrlLocation();
 
+  const { createCity } = useCities();
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchCityData() {
       try {
@@ -38,7 +47,7 @@ function Form() {
         setCountry(data.countryName);
         setEmoji(convertToEmoji(data.countryCode));
 
-        if (!data.country)
+        if (!data.city)
           throw new Error(
             "That doesn't seem to be any city, click somewhere el"
           );
@@ -50,6 +59,22 @@ function Form() {
     }
     fetchCityData();
   }, [lat, lng]);
+
+  async function handleAdd(e) {
+    e.preventDefault();
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+    };
+
+    await createCity(newCity);
+    navigate("/app/cities");
+  }
 
   if (isGeoLoading) return <Spinner />;
 
@@ -67,10 +92,11 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        <DatePicker
           id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+          onChange={(date) => setDate(date)}
+          selected={date}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
 
@@ -84,7 +110,7 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <button>Add</button>
+        <button onClick={handleAdd}>Add</button>
         <button>&larr; Back</button>
       </div>
     </form>
