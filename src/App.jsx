@@ -10,30 +10,27 @@ import AppLayout from "./pages/AppLayout";
 // Fallback Page
 import PageNotFound from "./pages/PageNotFound";
 
-// Components
+// Components used inside protected routes
 import City from "./components/City";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Form from "./components/Form";
 
-// Context
+// Context Provider for cities data
 import { CitiesProvider } from "./contexts/CitiesContext";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* HomePageRoute */}
+        {/* Public routes */}
         <Route path="/" element={<Homepage />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="product" element={<Product />} />
         <Route path="login" element={<Login />} />
-        {/* HomePageRoute */}
 
-        {/* AppLayout Routes */}
-
-        {/* ↓↓↓ AppLayout ProtectedRoute */}
+        {/* Protected AppLayout routes */}
         <Route
           path="app"
           element={
@@ -44,18 +41,21 @@ function App() {
             </CitiesProvider>
           }
         >
+          {/* Redirect /app to /app/cities */}
           <Route index element={<Navigate replace to="cities" />} />
-          <Route path="cities" element={<CityList />} />
 
+          {/* Cities routes */}
+          <Route path="cities" element={<CityList />} />
           <Route path="cities/:id" element={<City />} />
 
+          {/* Countries route */}
           <Route path="countries" element={<CountryList />} />
 
+          {/* Form route */}
           <Route path="form" element={<Form />} />
         </Route>
 
-        {/* AppLayout Routes */}
-
+        {/* Catch all unmatched routes */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom"; // Hook to programmatically navigate pages
+import { useAuth } from "../hooks/useAuth"; // Custom hook to get auth state
 
-import Button from "../components/Button";
-import PageNav from "../components/PageNav";
-import styles from "./Homepage.module.css";
+import Button from "../components/Button"; // Reusable button component
+import PageNav from "../components/PageNav"; // Navigation component
+import styles from "./Homepage.module.css"; // Scoped CSS module styles
 
 export default function Homepage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Get navigate function from React Router
+  const { isAuthed } = useAuth(); // Get authentication status from context
 
-  const { isAuthed } = useAuth();
-
+  // Handle button click: navigate to "app" if logged in, else to "login" page
   function handleClick() {
     if (isAuthed) navigate("app");
     else navigate("/login");
@@ -17,7 +17,7 @@ export default function Homepage() {
 
   return (
     <main className={styles.homepage}>
-      <PageNav />
+      <PageNav /> {/* Render page navigation */}
       <section>
         <h1>
           You travel the world.

@@ -1,20 +1,32 @@
-import styles from "./Login.module.css";
-
+// React hooks
 import { useEffect, useState } from "react";
 
-import PageNav from "../components/PageNav";
-import { useAuth } from "../hooks/useAuth";
+// React Router
 import { useNavigate } from "react-router-dom";
+
+// Custom hooks
+import { useAuth } from "../hooks/useAuth";
+
+// Components
+import PageNav from "../components/PageNav";
 import Button from "../components/Button";
+
+// Styles
+import styles from "./Login.module.css";
+
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
+  // State variables for form inputs
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
 
+  // Auth context values and functions
   const { login, isAuthed } = useAuth();
 
+  // Navigation hook from React Router
   const navigate = useNavigate();
 
+  // Handler for login form submit
   function handleLogin(e) {
     e.preventDefault();
 
@@ -23,6 +35,7 @@ export default function Login() {
     }
   }
 
+  // Effect to redirect after successful login
   useEffect(() => {
     if (isAuthed) navigate("/app", { replace: true });
   }, [isAuthed, navigate]);
