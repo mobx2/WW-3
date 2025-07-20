@@ -38,10 +38,16 @@ function reducer(state, action) {
         ...state,
         cities: [...state.cities, action.payload],
         isLoading: false,
+        currentCity: action.payload,
       };
 
-    case "delete/City":
-      return {};
+    case "city/deleted":
+      return {
+        ...state,
+        cities: state.cities.filter((city) => city.id !== action.payload),
+        isLoading: false,
+        currentCity: {},
+      };
 
     case "reject":
       return {
@@ -118,13 +124,27 @@ function CitiesProvider({ children }) {
 
   async function deleteCity(id) {
     try {
-      dispatch({ type: "delete/City" });
-    } catch {}
+      dispatch({ type: "loading" });
+      await fetch(`${BASE_URL}/cities/${id}`, { method: "DELETE" });
+      dispatch({ type: "city/deleted", payload: id });
+    } catch {
+      dispatch({
+        type: "reject",
+        payload: "There was an error deleting city...",
+      });
+    }
   }
 
   return (
     <CitiesContext.Provider
-      value={{ cities, isLoading, getCity, currentCity, createCity }}
+      value={{
+        cities,
+        isLoading,
+        getCity,
+        currentCity,
+        createCity,
+        deleteCity,
+      }}
     >
       {children}
     </CitiesContext.Provider>

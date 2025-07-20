@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./CityItem.module.css";
+import { useCities } from "../hooks/useCities";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -11,8 +12,15 @@ const formatDate = (date) =>
 function CityItem({ city }) {
   const { cityName, emoji, date, id, position } = city;
 
-  function handleDelete(e) {
+  const { deleteCity } = useCities();
+
+  const navigate = useNavigate();
+
+  async function handleDelete(e) {
     e.preventDefault();
+
+    await deleteCity(id);
+    navigate("/app/cities");
   }
 
   return (

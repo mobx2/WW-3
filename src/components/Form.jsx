@@ -9,7 +9,7 @@ import styles from "./Form.module.css";
 import { useUrlLocation } from "../hooks/useUrlLocation";
 import Spinner from "./Spinner";
 import { useCities } from "../hooks/useCities";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
