@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { useCities } from "../hooks/useCities";
 import { useUrlLocation } from "../hooks/useUrlLocation";
 import { useNavigate } from "react-router-dom";
+import useGeolocation from "../hooks/UseGeoLocation";
+import Button from "./Button";
 
 function Map() {
   const { cities } = useCities();
@@ -25,8 +27,17 @@ function Map() {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
   }, [mapLat, mapLng]);
 
+  const {
+    isLoading: isLoadingPosition,
+    position: geoLocationPosition,
+    getPosition,
+  } = useGeolocation();
+
   return (
     <div className={styles.mapContainer}>
+      <Button type="position" onClick={getPosition}>
+        {isLoadingPosition ? "Laddong.." : "Use your location"}
+      </Button>
       <MapContainer
         className={styles.map}
         center={[mapLat || 40, mapLng || 0]}

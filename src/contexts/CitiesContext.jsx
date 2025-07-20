@@ -62,7 +62,7 @@ function reducer(state, action) {
 }
 
 function CitiesProvider({ children }) {
-  const [{ cities, isLoading, error, currentCity }, dispatch] = useReducer(
+  const [{ cities, isLoading, currentCity }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -78,8 +78,11 @@ function CitiesProvider({ children }) {
         const data = await res.json();
 
         dispatch({ type: "cities/loaded", payload: data });
-      } catch (err) {
-        dispatch({ type: "reject", payload: err.message || "Unknown error" });
+      } catch {
+        dispatch({
+          type: "rejected",
+          payload: "There was an error loading cities...",
+        });
       }
     }
     getCities();
@@ -96,8 +99,8 @@ function CitiesProvider({ children }) {
       if (!res.ok) throw new Error("Something went wrong");
 
       dispatch({ type: "city/loaded", payload: data });
-    } catch (err) {
-      dispatch({ type: "reject", payload: err.message });
+    } catch {
+      console.error("There was an error loading city...");
     }
   }
 

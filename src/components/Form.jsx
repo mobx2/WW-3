@@ -12,6 +12,7 @@ import { useCities } from "../hooks/useCities";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "./Button";
 import ButtonBack from "./ButtonBack";
+import Message from "./Message";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -30,6 +31,7 @@ function Form() {
   const [notes, setNotes] = useState("");
   const [emoji, setEmoji] = useState("");
   const [isGeoLoading, setIsGeoLoading] = useState(false);
+  const [geoCodingError, setGeoCodingError] = useState("");
 
   const { lat, lng } = useUrlLocation();
 
@@ -40,6 +42,7 @@ function Form() {
   useEffect(() => {
     async function fetchCityData() {
       try {
+        setGeoCodingError("");
         setIsGeoLoading(true);
         const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
 
@@ -54,7 +57,7 @@ function Form() {
             "That doesn't seem to be any city, click somewhere el"
           );
       } catch (err) {
-        console.log(err.message);
+        setGeoCodingError(err.message);
       } finally {
         setIsGeoLoading(false);
       }
@@ -79,6 +82,8 @@ function Form() {
   }
 
   if (isGeoLoading) return <Spinner />;
+
+  if (geoCodingError) return <Message message={geoCodingError} />;
 
   return (
     <form className={styles.form}>
