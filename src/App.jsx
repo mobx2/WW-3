@@ -15,6 +15,7 @@ import City from "./components/City";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Form from "./components/Form";
 
 // Context
 import { CitiesProvider } from "./contexts/CitiesContext";
@@ -49,7 +50,10 @@ function App() {
           <Route path="cities/:id" element={<City />} />
 
           <Route path="countries" element={<CountryList />} />
+
+          <Route path="form" element={<Form />} />
         </Route>
+
         {/* AppLayout Routes */}
 
         <Route path="*" element={<PageNotFound />} />
