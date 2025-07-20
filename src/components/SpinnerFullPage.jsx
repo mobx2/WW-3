@@ -1,4 +1,7 @@
+// UI Components
 import Spinner from "./Spinner";
+
+// Styles
 import styles from "./SpinnerFullPage.module.css";
 
 function SpinnerFullPage() {
