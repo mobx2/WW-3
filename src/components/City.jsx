@@ -37,7 +37,7 @@ function City() {
       await getCity(id);
     }
     fetchCity();
-  }, [id]);
+  }, [id, getCity]);
 
   if (isLoading) return <Spinner />;
 
