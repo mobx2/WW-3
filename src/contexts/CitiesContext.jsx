@@ -1,5 +1,11 @@
 // Core
-import { createContext, useCallback, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+} from "react";
 
 // Context Creation
 const CitiesContext = createContext();
@@ -153,20 +159,21 @@ function CitiesProvider({ children }) {
     }
   }
 
+  const value = useMemo(
+    () => ({
+      cities,
+      isLoading,
+      getCity,
+      currentCity,
+      createCity,
+      deleteCity,
+    }),
+    [cities, currentCity, isLoading, getCity]
+  );
+
   // Context value exposed to consumers
   return (
-    <CitiesContext.Provider
-      value={{
-        cities,
-        isLoading,
-        getCity,
-        currentCity,
-        createCity,
-        deleteCity,
-      }}
-    >
-      {children}
-    </CitiesContext.Provider>
+    <CitiesContext.Provider value={value}>{children}</CitiesContext.Provider>
   );
 }
 
