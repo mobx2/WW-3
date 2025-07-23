@@ -36,16 +36,20 @@
 }
 
 .deleteBtn {
-  height: 2rem;
+  height: 1.5em;
   aspect-ratio: 1;
   border-radius: 50%;
   border: none;
   background-color: var(--color-dark--1);
   color: var(--color-light--2);
-  font-size: 1.6rem;
-  font-weight: 400;
+  font-size: 1.7em;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .deleteBtn:hover {

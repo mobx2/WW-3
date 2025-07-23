@@ -13,18 +13,6 @@
       }
     },
     {
-      "id": "d769",
-      "cityName": "Gharyan",
-      "country": "Libya",
-      "emoji": "🇱🇾",
-      "date": "2025-07-20T18:03:29.552Z",
-      "notes": "",
-      "position": {
-        "lat": "30.178968798268382",
-        "lng": "14.633789062500002"
-      }
-    },
-    {
       "id": "8f2e",
       "cityName": "Ajdabiya",
       "country": "Libya",
@@ -34,30 +22,6 @@
       "position": {
         "lat": "29.75945715645726",
         "lng": "21.1376953125"
-      }
-    },
-    {
-      "id": "fa74",
-      "cityName": "Marsa Maţruḩ",
-      "country": "Egypt",
-      "emoji": "🇪🇬",
-      "date": "2025-07-20T18:03:37.237Z",
-      "notes": "",
-      "position": {
-        "lat": "29.683251548520435",
-        "lng": "27.24609375"
-      }
-    },
-    {
-      "id": "321c",
-      "cityName": "Mykolayiv",
-      "country": "Ukraine",
-      "emoji": "🇺🇦",
-      "date": "2025-07-20T18:11:13.676Z",
-      "notes": "",
-      "position": {
-        "lat": "46.79816754370762",
-        "lng": "31.596679687500004"
       }
     }
   ]

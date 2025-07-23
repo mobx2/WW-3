@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
@@ -19,6 +19,7 @@ import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Form from "./components/Form";
+import SpinnerFullPage from "./components/SpinnerFullPage";
 
 // Context Provider for cities data
 import { CitiesProvider } from "./contexts/CitiesContext";
@@ -38,41 +39,43 @@ const PageNotFound = lazy(() => import("./pages/Homepage"));
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<Homepage />} />
-        <Route path="pricing" element={<Pricing />} />
-        <Route path="product" element={<Product />} />
-        <Route path="login" element={<Login />} />
+      <Suspense fallback={<SpinnerFullPage />}>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<Homepage />} />
+          <Route path="pricing" element={<Pricing />} />
+          <Route path="product" element={<Product />} />
+          <Route path="login" element={<Login />} />
 
-        {/* Protected AppLayout routes */}
-        <Route
-          path="app"
-          element={
-            <CitiesProvider>
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            </CitiesProvider>
-          }
-        >
-          {/* Redirect /app to /app/cities */}
-          <Route index element={<Navigate replace to="cities" />} />
+          {/* Protected AppLayout routes */}
+          <Route
+            path="app"
+            element={
+              <CitiesProvider>
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              </CitiesProvider>
+            }
+          >
+            {/* Redirect /app to /app/cities */}
+            <Route index element={<Navigate replace to="cities" />} />
 
-          {/* Cities routes */}
-          <Route path="cities" element={<CityList />} />
-          <Route path="cities/:id" element={<City />} />
+            {/* Cities routes */}
+            <Route path="cities" element={<CityList />} />
+            <Route path="cities/:id" element={<City />} />
 
-          {/* Countries route */}
-          <Route path="countries" element={<CountryList />} />
+            {/* Countries route */}
+            <Route path="countries" element={<CountryList />} />
 
-          {/* Form route */}
-          <Route path="form" element={<Form />} />
-        </Route>
+            {/* Form route */}
+            <Route path="form" element={<Form />} />
+          </Route>
 
-        {/* Catch all unmatched routes */}
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+          {/* Catch all unmatched routes */}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
