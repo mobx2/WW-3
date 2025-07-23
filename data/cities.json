@@ -23,6 +23,42 @@
         "lat": "29.75945715645726",
         "lng": "21.1376953125"
       }
+    },
+    {
+      "id": "9e48",
+      "cityName": "Abu Karinka",
+      "country": "Sudan (the)",
+      "emoji": "🇸🇩",
+      "date": "2025-07-23T12:34:03.891Z",
+      "notes": "",
+      "position": {
+        "lat": "11.43695521614319",
+        "lng": "26.696777343750004"
+      }
+    },
+    {
+      "id": "079c",
+      "cityName": "Ndoro-Mboli",
+      "country": "Central African Republic (the)",
+      "emoji": "🇨🇫",
+      "date": "2025-07-23T12:34:10.016Z",
+      "notes": "",
+      "position": {
+        "lat": "6.882800241767556",
+        "lng": "17.072753906250004"
+      }
+    },
+    {
+      "id": "2a4c",
+      "cityName": "Koulamoutou",
+      "country": "Gabon",
+      "emoji": "🇬🇦",
+      "date": "2025-07-23T12:34:12.946Z",
+      "notes": "",
+      "position": {
+        "lat": "-0.9008417889908868",
+        "lng": "12.502441406250002"
+      }
     }
   ]
 }
